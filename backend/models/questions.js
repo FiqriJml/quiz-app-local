@@ -1,35 +1,23 @@
+// backend/models/questions.js
+
 const questions = [
   {
     id: 1,
     question: "Apa ibukota Indonesia?",
-    options: ["Jakarta", "Bandung", "Surabaya", "Medan"],
-    answer: "Jakarta",
+    options: ["A. Jakarta", "B. Bandung", "C. Surabaya", "D. Medan"],
+    answer: "A",
   },
   {
     id: 2,
-    question: "Apa ibukota Inggris?",
-    options: ["London", "New York", "Paris", "Tokyo"],
-    answer: "London",
-  },
-  {
-    id: 3,
-    question: "Apa ibukota Jepang?",
-    options: ["Tokyo", "Yokohama", "Osaka", "Nagoya"],
-    answer: "Tokyo",
-  },
-  {
-    id: 4,
-    question: "Apa ibukota Italia?",
-    options: ["Roma", "Milan", "Napoli", "Palermo"],
-    answer: "Roma",
-  },
-  {
-    id: 5,
-    question: "Apa ibukota Spanyol?",
-    options: ["Madrid", "Barcelona", "Valencia", "Sevilla"],
-    answer: "Madrid",
+    question: "Siapa penulis buku Harry Potter?",
+    options: [
+      "A. J.K. Rowling",
+      "B. George Orwell",
+      "C. J.R.R. Tolkien",
+      "D. Stephen King",
+    ],
+    answer: "A",
   },
 ];
 
 module.exports = questions;
-// Export the questions array as a module

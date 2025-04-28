@@ -16,29 +16,25 @@ Proyek ini bertujuan untuk membuat aplikasi quiz multiple choice yang berjalan o
 
 ## Struktur Folder
 
-quiz-online-lokal
-/backend
-/controllers
-
-- quizController.js
-- scoringController.js
-  /routes
-- quizRoutes.js
-- scoringRoutes.js
-  /models
-- questions.js
-  /utils
-- socket.js
-  app.js
-  package.json
-  /frontend
-  /css
-- styles.css
-  /js
-- quiz.js
-  index.html
-  .gitignore
-  README.md
+QUIZ-ONLINE-LOKAL/
+├── backend/
+│ ├── controllers/
+│ │ ├── quizController.js
+│ │ └── scoringController.js
+│ ├── models/
+│ │ └── questions.js
+│ ├── routes/
+│ │ ├── quizRoutes.js
+│ │ └── scoringRoutes.js
+│ └── utils/
+│ └── socket.js
+├── frontend/
+├── node_modules/
+├── public/
+├── app.js
+├── package.json
+├── package-lock.json
+└── README.md
 
 ## Milestone
 

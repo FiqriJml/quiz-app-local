@@ -1,38 +1,32 @@
-const questions = [
-  {
-    id: 1,
-    question: "Apa ibukota Indonesia?",
-    options: ["A. Jakarta", "B. Bandung", "C. Surabaya", "D. Medan"],
-    answer: "A",
-  },
-  {
-    id: 2,
-    question: "Siapa penulis buku Harry Potter?",
-    options: [
-      "A. J.K. Rowling",
-      "B. George Orwell",
-      "C. J.R.R. Tolkien",
-      "D. Stephen King",
-    ],
-    answer: "A",
-  },
-];
+// backend/controllers/quizController.js
 
-// Handler untuk mendapatkan soal
-exports.getQuestions = (req, res) => {
-  res.json(questions);
+const questions = require("../models/questions");
+
+// Kirim soal tanpa jawaban ke client
+exports.getAllQuiz = (req, res) => {
+  const questionsWithoutAnswer = questions.map(({ id, question, options }) => ({
+    id,
+    question,
+    options,
+  }));
+  res.json(questionsWithoutAnswer);
 };
 
-// Handler untuk menerima jawaban
-exports.submitAnswers = (req, res) => {
-  const submittedAnswers = req.body;
-  let score = 0;
+// Terima jawaban peserta dan simpan sementara
+let participantAnswers = [];
 
-  questions.forEach((question) => {
-    if (submittedAnswers[question.id] === question.answer) {
-      score++;
-    }
-  });
+exports.submitAnswer = (req, res) => {
+  const { participantId, answers } = req.body; // answers: [{ questionId, answer }, ...]
 
-  res.json({ score });
+  const existingIndex = participantAnswers.findIndex(
+    (p) => p.participantId === participantId
+  );
+
+  if (existingIndex >= 0) {
+    participantAnswers[existingIndex].answers = answers;
+  } else {
+    participantAnswers.push({ participantId, answers });
+  }
+
+  res.json({ message: "Jawaban diterima" });
 };

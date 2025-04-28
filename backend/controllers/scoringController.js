@@ -1,15 +1,17 @@
+// backend/controllers/scoringController.js
+
 const questions = require("../models/questions");
 
 exports.calculateScore = (req, res) => {
-  const { answers } = req.body; // Get the answers from the request body
-  let score = 0; // Initialize score
+  const { participantId, answers } = req.body; // answers: [{ questionId, answer }, ...]
+  let score = 0;
 
-  // Loop through each question and check if the answer is correct
-  questions.forEach((question) => {
-    if (answers[question.id] === question.answer) {
-      score += 1; // Increment score for each correct answer
+  answers.forEach(({ questionId, answer }) => {
+    const question = questions.find((q) => q.id === questionId);
+    if (question && question.answer === answer) {
+      score++;
     }
   });
 
-  res.json({ score }); // Send the score back to the client
+  res.json({ participantId, score });
 };
