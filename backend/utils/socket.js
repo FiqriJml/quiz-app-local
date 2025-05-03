@@ -1,13 +1,16 @@
 const socketIo = require("socket.io");
 const questions = require("../models/questions");
 
-let partcipantScores = {};
+let participantScores = {};
 
 module.exports = (server) => {
   const io = socketIo(server);
   io.on("connection", (socket) => {
     console.log("User connected:", socket.id);
-
+    socket.on("startQuiz", (participantId) => {
+      participantScores[participantId] = 0;
+      socket.emit("scoreUpdate", { participantId, score: 0 });
+    });
     socket.on("submitAnswer", (data) => {
       const { participantId, questionId, answer } = data;
       const question = questions.find((q) => q.id === questionId);
@@ -17,20 +20,20 @@ module.exports = (server) => {
       }
       const isCorrect = question.answer === answer;
       if (!participantScores[participantId]) {
-        partcipantScores[participantId] = 0;
+        participantScores[participantId] = 0;
       }
       if (isCorrect) {
-        partcipantScores[participantId]++;
+        participantScores[participantId]++;
       }
       socket.emit("answerResult", {
         isCorrect,
-        score: partcipantScores[participantId],
+        score: participantScores[participantId],
       });
       io.emit("scoreUpdate", {
         participantId,
-        score: partcipantScores[participantId],
+        score: participantScores[participantId],
       });
-      console.log("Participant scores:", partcipantScores);
+      console.log("Participant scores:", participantScores);
     });
     socket.on("disconnect", () => {
       console.log("User disconnected:", socket.id);

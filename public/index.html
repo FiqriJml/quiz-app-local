@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quiz Online Lokal</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f9;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        padding: 20px;
+        min-height: 100vh;
+        margin: 0;
+      }
+      #quiz-container {
+        background: white;
+        padding: 20px 30px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        width: 400px;
+      }
+      h1 {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+      .question-block {
+        margin-bottom: 20px;
+      }
+      label {
+        cursor: pointer;
+      }
+      button {
+        width: 100%;
+        padding: 12px;
+        background-color: #007bff;
+        border: none;
+        color: white;
+        font-size: 16px;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      button:disabled {
+        background-color: #aaa;
+        cursor: not-allowed;
+      }
+      #result {
+        margin-top: 20px;
+        font-weight: bold;
+        text-align: center;
+        min-height: 24px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="quiz-container">
+      <h1>Quiz Online Lokal</h1>
+      <div id="quiz"></div>
+      <button id="submit-btn" disabled>Submit</button>
+      <div id="result"></div>
+    </div>
+
+    <!-- Socket.IO client -->
+    <script src="/socket.io/socket.io.js"></script>
+    <!-- Script quiz -->
+    <script src="script.js"></script>
+  </body>
+</html>
